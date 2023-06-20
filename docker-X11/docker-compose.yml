@@ -1,0 +1,12 @@
+version: '2.3'
+services:
+  xclock:
+    build: .
+    command: /usr/bin/xclock
+    environment:
+      XAUTHORITY: /.Xauthority
+      DISPLAY: $DISPLAY
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ~/.Xauthority:/.Xauthority
+    network_mode: "host"

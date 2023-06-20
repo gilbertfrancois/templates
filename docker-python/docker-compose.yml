@@ -1,0 +1,11 @@
+version: "3.8"
+services:
+    python-venv:
+        build: .
+        volumes: 
+            - type: bind
+              source: ./src
+              target: /src
+            - type: bind
+              source: ./venv
+              target: /venv
