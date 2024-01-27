@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>wasm :: Call JS function in C</title>
+        <script>
+            var exports;
+            WebAssembly.instantiateStreaming(
+                fetch("call_js_fn_in_c.wasm"),
+                {
+                    env: {
+                        js_myfunction: js_myfunction,
+                    },
+                },
+            ).then((lib) => {
+                exports = lib.instance.exports;
+            });
+
+            function js_myfunction() {
+                return 123;
+            }
+
+            function wasm_myfunction() {
+                var time = exports.wasm_myfunction();
+                document.querySelector("#answer").innerHTML = time;
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Call JS function in C</h1>
+        <p>Demonstrates how to export a JavaScript function to WASM.</p>
+        <p />
+        <div>
+            <button onclick="wasm_myfunction()">get number</button>
+            <p id="answer"></p>
+        </div>
+    </body>
+</html>

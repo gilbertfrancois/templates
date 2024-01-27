@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>wasm :: call C function in JS</title>
+        <script>
+            function run_wasm() {
+                WebAssembly.instantiateStreaming(
+                    fetch("call_c_fn_in_js.wasm"),
+                    {},
+                ).then((lib) => {
+                    // Call the wrapped function, as it was a js function.
+                    a = document.querySelector("#a").value;
+                    b = document.querySelector("#b").value;
+                    var answer = lib.instance.exports.add(a, b);
+                    document.querySelector("#answer").innerHTML = answer;
+                });
+            }
+        </script>
+        :
+    </head>
+    <body>
+        <h1>Call C function in JS</h1>
+        <p>Demonstrates how to call a WASM function from JavaScript.</p>
+        <input type="number" id="a" /> + <input type="number" id="b" />
+        <button onclick="run_wasm()">=</button>
+        <p id="answer"></p>
+    </body>
+</html>

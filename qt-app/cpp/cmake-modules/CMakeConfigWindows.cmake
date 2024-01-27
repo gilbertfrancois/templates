@@ -1,0 +1,12 @@
+# Configuration file for Windows
+
+
+# ============================================================================
+# ------------------------------ Compile and Link ----------------------------
+
+add_executable(${APP_NAME} ${SOURCES})
+
+target_link_libraries(
+        ${APP_NAME}
+        Qt5::Widgets
+)

@@ -1,0 +1,25 @@
+{
+  "name": "react-flask-template",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev": "npx parcel src/index.html",
+    "prod": "npx parcel build src/index.html",
+    "clean": "rm -rf dist; rm -rf .parcel-cache; rm -rf node_modules",
+    "cp": "cp -r ./assets ./dist/"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.2.5",
+    "babel-preset-env": "^1.7.0",
+    "parcel": "^2.6.0",
+    "prettier": "^2.7.1",
+    "process": "^0.11.10"
+  }
+}

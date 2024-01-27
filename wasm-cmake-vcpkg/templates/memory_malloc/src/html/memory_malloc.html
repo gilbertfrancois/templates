@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>wasm :: memory malloc</title>
+        <script>
+            var memory = new WebAssembly.Memory({ initial: 256, maximum: 512 });
+            var exports;
+            WebAssembly.instantiateStreaming(fetch("memory_malloc.wasm"), {
+                js: {
+                    mem: memory,
+                },
+                env: {
+                    emscripten_resize_heap: function (delta) {
+                        memory.grow(delta);
+                    },
+                },
+            }).then((lib) => {
+                exports = lib.instance.exports;
+                memory = lib.instance.exports.memory;
+            });
+
+            function send_buffer_to_wasm() {
+                var size = 10;
+                var uint32_t_size = 4;
+                var buffer_ptr = exports.wasm_malloc(size * uint32_t_size);
+                console.log("buffer_ptr: ", buffer_ptr);
+                var arr = new Uint32Array(memory.buffer, buffer_ptr, size);
+                for (var i = 0; i < size; i++) {
+                    arr[i] = i * 2;
+                }
+                var sum = exports.sum(buffer_ptr, size);
+                exports.wasm_free(buffer_ptr);
+                document.querySelector("#answer").innerHTML = sum;
+            }
+
+            function receive_buffer_from_wasm() {
+                var buffer_ptr = exports.get_string();
+                console.log("buffer_ptr: ", buffer_ptr);
+                var bytes = new Uint8Array(memory.buffer, buffer_ptr);
+                var strlen = 0;
+                while (bytes[strlen] != 0) strlen++;
+                var str = new TextDecoder("utf-8").decode(
+                    bytes.subarray(0, strlen),
+                );
+                console.log(str);
+                navigator.clipboard.writeText(str);
+                document.querySelector("#string").innerHTML = str;
+            }
+        </script>
+    </head>
+    <body>
+        <h1>memory malloc</h1>
+        <p>Demonstrates how to send and receive a block of memory in WASM.</p>
+        <div>
+            <button onclick="send_buffer_to_wasm()">Calculate sum</button>
+            <p id="answer"></p>
+        </div>
+        <div>
+            <button onclick="receive_buffer_from_wasm()">Get string</button>
+            <p id="string"></p>
+        </div>
+    </body>
+</html>

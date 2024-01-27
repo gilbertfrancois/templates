@@ -1,0 +1,15 @@
+set(target_name main_loop)
+
+if(DEFINED EMSCRIPTEN)
+  add_executable(${target_name} src/c/main.c)
+  set(CMAKE_EXECUTABLE_SUFFIX ".js")
+  # set_target_properties(${target_name} PROPERTIES LINK_FLAGS "-s EXIT_RUNTIME=1")
+else()
+  add_executable(${target_name} src/c/main.c)
+endif()
+
+install(TARGETS ${target_name} DESTINATION ${CMAKE_SOURCE_DIR}/dist)
+if(DEFINED EMSCRIPTEN)
+  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${target_name}.wasm DESTINATION ${CMAKE_SOURCE_DIR}/dist)
+  install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/html/${target_name}.html DESTINATION ${CMAKE_SOURCE_DIR}/dist)
+endif()

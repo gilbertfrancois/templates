@@ -1,0 +1,7 @@
+{
+    "name": "webassembly-cookbook",
+    "version": "1.0.0",
+    "description": "Minimal project templates for C and WebAssembly development.",
+    "dependencies": [
+    ]
+}

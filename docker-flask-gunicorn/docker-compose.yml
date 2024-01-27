@@ -1,0 +1,6 @@
+services:
+  flask:
+    build: .
+    command: /run_prod.sh
+    ports:
+      - 5000:5000
