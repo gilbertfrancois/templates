@@ -1,0 +1,15 @@
+services:
+  nginx:
+    image: nginx:stable-alpine
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - ./docker/config/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./web_frontend/dist:/var/www:ro
+
+  flask:
+    build: .
+    expose:
+      - 5000
+    command: gunicorn --access-logfile - --chdir app main:app -w 2 --threads 2 --bind 0.0.0.0:5000
