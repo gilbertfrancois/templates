@@ -35,5 +35,5 @@ docker network ls
 
 ## References
 
-- [https://testdriven.io/blog/dockerizing-flask-with-postgres-gunicorn-and-nginx/](Dockerizing Flask with Postgres, Gunicorn, and Nginx)
-- [https://www.freecodecamp.org/news/docker-nginx-letsencrypt-easy-secure-reverse-proxy-40165ba3aee2/](How to set up an easy and secure reverse proxy with Docker, Nginx & Letsencrypt)
+- [https://testdriven.io/blog/dockerizing-flask-with-postgres-gunicorn-and-nginx](Dockerizing Flask with Postgres, Gunicorn, and Nginx)
+- [https://www.freecodecamp.org/news/docker-nginx-letsencrypt-easy-secure-reverse-proxy-40165ba3aee2](How to set up an easy and secure reverse proxy with Docker, Nginx & Letsencrypt)
