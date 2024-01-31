@@ -4,7 +4,9 @@ _Gilbert François Duivesteijn_
 
 ## About
 
-This template exemplifies a streamlined structure for a Python Flask-powered web backend. It leverages the Gunicorn WSGI server, catering to the Docker internal bridge network through port 5000. Additionally, it employs an Nginx reverse proxy to seamlessly route client requests from port 80 to the backend on port 5000.
+- Python Flask website or REST api
+- In production mode, served by Gunicorn to port 5000, exposed to the Docker internal bridge network only.
+- Nginx reverse proxy to port 80, exposed to the Docker internal bridge network and the host machine.
 
 ## Build and run
 
