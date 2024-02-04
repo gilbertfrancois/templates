@@ -1,3 +1,3 @@
 export default config = {
-    API_URL: "http://localhost:5000
+    API_URL: location.protocol + "//" + location.hostname + ":5000",
 };

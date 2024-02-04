@@ -6,7 +6,8 @@ export default function App() {
 
     const fetchBackEndStatus = async () => {
         try {
-            const response = await fetch(config.API_URL + "/api/status", { mode: "cors" });
+            console.log(config.API_URL);
+            const response = await fetch(config.API_URL + "/api/status");
             const data = await response.json();
             if (data.success) {
                 setBackEndStatus(data.data.status);
